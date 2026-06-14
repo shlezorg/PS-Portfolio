@@ -606,7 +606,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Build learnings cards
     const learningsHTML = data.learnings.map(l => `
-      <div class="learning-card">
+      <div class="glass-card learning-card">
         <div class="concept-name"><i class="fas fa-bookmark text-cyan"></i> ${l.concept}</div>
         <div class="concept-explanation">${l.explanation}</div>
         <div class="concept-application"><i class="fas fa-lightbulb"></i> ${l.application}</div>
@@ -621,52 +621,104 @@ document.addEventListener('DOMContentLoaded', () => {
     // Build comparison grid
     const comparisonHTML = `
       <div class="app-comparison-grid">
-        <div class="app-comparison-card">
+        <div class="glass-card app-comparison-card">
           <div class="app-column-header"><i class="fas fa-graduation-cap"></i> University</div>
           <div class="app-column-text">${data.appColumns.university}</div>
         </div>
-        <div class="app-comparison-card">
+        <div class="glass-card app-comparison-card">
           <div class="app-column-header"><i class="fas fa-laptop-code"></i> Internships</div>
           <div class="app-column-text">${data.appColumns.internships}</div>
         </div>
-        <div class="app-comparison-card">
+        <div class="glass-card app-comparison-card">
           <div class="app-column-header"><i class="fas fa-briefcase"></i> Workplace</div>
           <div class="app-column-text">${data.appColumns.workplace}</div>
         </div>
-        <div class="app-comparison-card">
+        <div class="glass-card app-comparison-card">
           <div class="app-column-header"><i class="fas fa-users-gear"></i> Leadership</div>
           <div class="app-column-text">${data.appColumns.leadership}</div>
         </div>
-        <div class="app-comparison-card">
+        <div class="glass-card app-comparison-card">
           <div class="app-column-header"><i class="fas fa-rocket"></i> Career</div>
           <div class="app-column-text">${data.appColumns.career}</div>
         </div>
       </div>
     `;
 
-    detailsPane.innerHTML = `
-      <!-- 1. Hero Section -->
-      <div class="glass-card lecture-hero-banner">
-        <div class="lecture-hero-meta">
-          <span class="lecture-hero-num">${data.meta}</span>
-          <span class="lecture-hero-skill"><i class="fas fa-bullseye"></i> Key Skill: ${data.keySkill}</span>
-        </div>
-        <h2 class="lecture-hero-title">${data.title}</h2>
-        <blockquote class="lecture-hero-quote">${data.intro}</blockquote>
-      </div>
-
-      <!-- 2. Key Learnings -->
+    // Build Visual Framework Section conditionally
+    let visualFrameworkHTML = '';
+    if (id === "3") {
+      visualFrameworkHTML = `
       <div>
-        <h3 class="lecture-section-header"><i class="fas fa-book-open"></i> Key Concepts & Learnings</h3>
-        <div class="key-learnings-grid">
-          ${learningsHTML}
+        <h3 class="lecture-section-header"><i class="fas fa-cubes"></i> My Professional Portfolio</h3>
+        <div class="glass-card visual-framework-container portfolio-gallery-container">
+          <div class="portfolio-gallery-grid">
+            <div class="portfolio-gallery-card glass-card">
+              <div class="portfolio-image-wrapper">
+                <img src="media__1781246958125.jpg" alt="Portfolio Mockup - Home Hero" class="portfolio-gallery-image" />
+                <div class="portfolio-image-overlay">
+                  <span class="portfolio-image-tag"><i class="fas fa-home"></i> Home Hero Section</span>
+                </div>
+              </div>
+              <div class="portfolio-gallery-info">
+                <h4 class="portfolio-gallery-title">Hero Home Page Mockup</h4>
+              </div>
+            </div>
+            <div class="portfolio-gallery-card glass-card">
+              <div class="portfolio-image-wrapper">
+                <img src="media__1781246958120.jpg" alt="Portfolio Mockup - About Page" class="portfolio-gallery-image" />
+                <div class="portfolio-image-overlay">
+                  <span class="portfolio-image-tag"><i class="fas fa-id-card"></i> About Me Section</span>
+                </div>
+              </div>
+              <div class="portfolio-gallery-info">
+                <h4 class="portfolio-gallery-title">About Me Layout Mockup</h4>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-gallery-actions">
+            <a href="https://shlezorg.github.io/Portfolio/" target="_blank" class="btn btn-primary">
+              <i class="fas fa-external-link-alt"></i> Visit Live Portfolio Site
+            </a>
+          </div>
         </div>
       </div>
-
-      <!-- 3. Visual Framework -->
+      `;
+    } else if (id === "4") {
+      visualFrameworkHTML = `
+      <div>
+        <h3 class="lecture-section-header"><i class="fas fa-file-invoice"></i> ATS-Optimized CV Showcase</h3>
+        <div class="glass-card visual-framework-container cv-showcase-container">
+          <div class="cv-showcase-grid">
+            <div class="glass-card cv-preview-card">
+              <div class="cv-preview-image-wrapper">
+                <img src="media__1781249055062.jpeg" alt="Kavishka Shenal CV Preview" class="cv-preview-image" />
+                <div class="cv-preview-overlay">
+                  <button class="btn btn-primary open-cv-btn"><i class="fas fa-expand"></i> View Full CV</button>
+                </div>
+              </div>
+              <h4 class="cv-preview-title">Verified ATS-Optimized CV</h4>
+            </div>
+            
+            <div class="svg-display-column">
+              <div class="svg-display-card" id="svg-container"></div>
+              <div class="svg-details-card glass-card">
+                <h4 class="svg-details-title" id="svg-details-title">
+                  <i class="fas fa-info-circle text-cyan"></i> Interactive Blueprint
+                </h4>
+                <p class="svg-details-text" id="svg-details-text">
+                  Click or hover on diagram elements to view detailed reflective analysis and application guidelines.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      `;
+    } else {
+      visualFrameworkHTML = `
       <div>
         <h3 class="lecture-section-header"><i class="fas fa-circle-nodes"></i> Interactive Visual Framework</h3>
-        <div class="visual-framework-container">
+        <div class="glass-card visual-framework-container">
           <div class="svg-display-card" id="svg-container"></div>
           <div class="svg-details-card glass-card">
             <h4 class="svg-details-title" id="svg-details-title">
@@ -678,6 +730,30 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>
       </div>
+      `;
+    }
+
+    detailsPane.innerHTML = `
+      <!-- 1. Hero Section -->
+      <div class="glass-card lecture-hero" style="background-image: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%), url('module_${id.padStart(2, '0')}_banner.png'); background-size: cover; background-position: center;">
+        <div class="lecture-hero-header">
+          <span class="lecture-hero-num">${data.meta}</span>
+          <span class="lecture-hero-skill"><i class="fas fa-bullseye"></i> Key Skill: ${data.keySkill}</span>
+        </div>
+        <h2 class="lecture-hero-title">${data.title}</h2>
+        <blockquote class="lecture-hero-intro">${data.intro}</blockquote>
+      </div>
+
+      <!-- 2. Key Learnings -->
+      <div>
+        <h3 class="lecture-section-header"><i class="fas fa-book-open"></i> Key Concepts & Learnings</h3>
+        <div class="key-learnings-grid">
+          ${learningsHTML}
+        </div>
+      </div>
+
+      <!-- 3. Visual Framework -->
+      ${visualFrameworkHTML}
 
       <!-- 4. Professional Applications -->
       <div>
@@ -706,7 +782,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <!-- 7. Lecture Takeaways Section -->
       <div>
         <h3 class="lecture-section-header"><i class="fas fa-lightbulb"></i> Core Takeaways & Relevance</h3>
-        <div class="takeaway-quote-card">
+        <div class="glass-card takeaway-quote-card">
           <div class="takeaway-grid">
             <div class="takeaway-item">
               <div class="takeaway-item-label"><i class="fas fa-brain"></i> Key Insight</div>
@@ -741,26 +817,26 @@ document.addEventListener('DOMContentLoaded', () => {
     detailsPane.innerHTML = `
       <div class="mod10-showcase">
         <!-- 1. Hero / Overview -->
-        <div class="mod10-hero">
+        <div class="glass-card lecture-hero mod10-hero" style="background-image: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%), url('module_10_banner.png'); background-size: cover; background-position: center;">
           <h2 class="mod10-hero-title">Community Service Project Case Study</h2>
           <div class="mod10-hero-subtitle">Sri Lankadhara Society Elders' Home Outreach</div>
           <p class="lecture-hero-quote" style="margin-bottom: 2rem; font-style: italic;">
             "True professionalism is not only about delivering clean code; it is about serving the society we exist in. Leadership finds its highest expression in empathy and community service."
           </p>
           <div class="mod10-meta-grid">
-            <div class="mod10-meta-card">
+            <div class="glass-card mod10-meta-card">
               <div class="mod10-meta-lbl">Date</div>
               <div class="mod10-meta-val">April 26, 2026</div>
             </div>
-            <div class="mod10-meta-card">
+            <div class="glass-card mod10-meta-card">
               <div class="mod10-meta-lbl">Location</div>
               <div class="mod10-meta-val">Colombo 06, Sri Lanka</div>
             </div>
-            <div class="mod10-meta-card">
+            <div class="glass-card mod10-meta-card">
               <div class="mod10-meta-lbl">Duration</div>
               <div class="mod10-meta-val">4 Weeks (Prep to Event Day)</div>
             </div>
-            <div class="mod10-meta-card">
+            <div class="glass-card mod10-meta-card">
               <div class="mod10-meta-lbl">Reciprocal Value</div>
               <div class="mod10-meta-val">Social Responsibility & Care</div>
             </div>
@@ -771,32 +847,32 @@ document.addEventListener('DOMContentLoaded', () => {
         <div>
           <h3 class="lecture-section-header"><i class="fas fa-chart-line"></i> Campaign Impact Dashboard</h3>
           <div class="mod10-impact-grid">
-            <div class="mod10-impact-card">
+            <div class="glass-card mod10-impact-card">
               <div class="mod10-impact-icon"><i class="fas fa-users"></i></div>
               <div class="mod10-impact-num">24</div>
               <div class="mod10-impact-lbl">Volunteer Team Members</div>
             </div>
-            <div class="mod10-impact-card">
+            <div class="glass-card mod10-impact-card">
               <div class="mod10-impact-icon"><i class="fas fa-heart"></i></div>
               <div class="mod10-impact-num">12</div>
               <div class="mod10-impact-lbl">Elders Supported</div>
             </div>
-            <div class="mod10-impact-card">
+            <div class="glass-card mod10-impact-card">
               <div class="mod10-impact-icon"><i class="fas fa-hand-holding-dollar"></i></div>
               <div class="mod10-impact-num">LKR 40,700</div>
               <div class="mod10-impact-lbl">Total Funds Raised</div>
             </div>
-            <div class="mod10-impact-card">
+            <div class="glass-card mod10-impact-card">
               <div class="mod10-impact-icon"><i class="fas fa-receipt"></i></div>
               <div class="mod10-impact-num">LKR 38,410</div>
               <div class="mod10-impact-lbl">Utilized Budget</div>
             </div>
-            <div class="mod10-impact-card">
+            <div class="glass-card mod10-impact-card">
               <div class="mod10-impact-icon"><i class="fas fa-box-open"></i></div>
               <div class="mod10-impact-num">9</div>
               <div class="mod10-impact-lbl">Essential Items Per Package</div>
             </div>
-            <div class="mod10-impact-card">
+            <div class="glass-card mod10-impact-card">
               <div class="mod10-impact-icon"><i class="fas fa-calendar-check"></i></div>
               <div class="mod10-impact-num">1</div>
               <div class="mod10-impact-lbl">Successful Community Event</div>
@@ -810,63 +886,63 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="mod10-timeline-container">
             <div class="mod10-timeline-item">
               <div class="mod10-timeline-badge"><i class="fas fa-compass"></i></div>
-              <div class="mod10-timeline-content">
+              <div class="glass-card mod10-timeline-content">
                 <h4 class="mod10-timeline-title">Phase 01: Initial Planning & Team Formation</h4>
                 <p class="mod10-timeline-desc">Assigned coordinator roles, mapped competencies (financial, logistics, entertainment), established communication protocols, and researched the Sri Lankadhara elders' home guidelines.</p>
               </div>
             </div>
             <div class="mod10-timeline-item">
               <div class="mod10-timeline-badge"><i class="fas fa-coins"></i></div>
-              <div class="mod10-timeline-content">
+              <div class="glass-card mod10-timeline-content">
                 <h4 class="mod10-timeline-title">Phase 02: Fund Collection & Financial Control</h4>
                 <p class="mod10-timeline-desc">Collected personal contributions of LKR 1,700 per member, raising LKR 40,700 total. Established a digital ledger to track expenditures, ensuring high accountability.</p>
               </div>
             </div>
             <div class="mod10-timeline-item">
               <div class="mod10-timeline-badge"><i class="fas fa-cart-shopping"></i></div>
-              <div class="mod10-timeline-content">
+              <div class="glass-card mod10-timeline-content">
                 <h4 class="mod10-timeline-title">Phase 03: Procurement & Logistics Management</h4>
                 <p class="mod10-timeline-desc">Audited local wholesale suppliers, compared prices, and purchased 9 types of health and personal care hygiene supplies for 12 custom care packages.</p>
               </div>
             </div>
             <div class="mod10-timeline-item">
               <div class="mod10-timeline-badge"><i class="fas fa-box-open"></i></div>
-              <div class="mod10-timeline-content">
+              <div class="glass-card mod10-timeline-content">
                 <h4 class="mod10-timeline-title">Phase 04: Care Package Assembly</h4>
                 <p class="mod10-timeline-desc">Volunteers gathered to inspect, pack, and label 12 personal care boxes. Verified each care kit contains exactly the 9 essential items with personalized cards.</p>
               </div>
             </div>
             <div class="mod10-timeline-item">
               <div class="mod10-timeline-badge"><i class="fas fa-van-shuttle"></i></div>
-              <div class="mod10-timeline-content">
+              <div class="glass-card mod10-timeline-content">
                 <h4 class="mod10-timeline-title">Phase 05: Travel & Event Setup</h4>
                 <p class="mod10-timeline-desc">Traveled to the facility. Managed unexpected Colombo traffic blockades dynamically, deploying a setup crew early to coordinate stage setups and acoustic systems check.</p>
               </div>
             </div>
             <div class="mod10-timeline-item">
               <div class="mod10-timeline-badge"><i class="fas fa-music"></i></div>
-              <div class="mod10-timeline-content">
+              <div class="glass-card mod10-timeline-content">
                 <h4 class="mod10-timeline-title">Phase 06: Acoustic Music & Interaction Session</h4>
                 <p class="mod10-timeline-desc">Hosted an interactive entertainment segment with acoustic songs and stories. Built immediate emotional connection with the residents, dissolving initial boundaries.</p>
               </div>
             </div>
             <div class="mod10-timeline-item">
               <div class="mod10-timeline-badge"><i class="fas fa-mug-hot"></i></div>
-              <div class="mod10-timeline-content">
+              <div class="glass-card mod10-timeline-content">
                 <h4 class="mod10-timeline-title">Phase 07: Afternoon Tea & Food Service</h4>
                 <p class="mod10-timeline-desc">Served warm herbal tea alongside sugar-free sweets and soft traditional cakes, ensuring diabetic residents' dietary restrictions were carefully followed.</p>
               </div>
             </div>
             <div class="mod10-timeline-item">
               <div class="mod10-timeline-badge"><i class="fas fa-gift"></i></div>
-              <div class="mod10-timeline-content">
+              <div class="glass-card mod10-timeline-content">
                 <h4 class="mod10-timeline-title">Phase 08: Gift & Care Pack Distribution</h4>
                 <p class="mod10-timeline-desc">Hand-delivered the custom hygiene care packages to all 12 residents. Exchanged wishes, stories, and reflections with each grandmother individually.</p>
               </div>
             </div>
             <div class="mod10-timeline-item">
               <div class="mod10-timeline-badge"><i class="fas fa-check-double"></i></div>
-              <div class="mod10-timeline-content">
+              <div class="glass-card mod10-timeline-content">
                 <h4 class="mod10-timeline-title">Phase 09: Project Completion & Retrospective</h4>
                 <p class="mod10-timeline-desc">Concluded the visit, gathered team feedback, reconciled the financial ledger, and compiled this case study outlining leadership learnings.</p>
               </div>
@@ -879,28 +955,28 @@ document.addEventListener('DOMContentLoaded', () => {
           <h3 class="lecture-section-header"><i class="fas fa-calculator"></i> Budget & Resource Allocation</h3>
           <div class="mod10-budget-grid">
             <div class="mod10-budget-metrics">
-              <div class="mod10-budget-card">
+              <div class="glass-card mod10-budget-card">
                 <div class="mod10-budget-lbl">Total Funds Raised</div>
                 <div class="mod10-budget-val">LKR 40,700</div>
               </div>
-              <div class="mod10-budget-card">
+              <div class="glass-card mod10-budget-card">
                 <div class="mod10-budget-lbl">Total Expenses</div>
                 <div class="mod10-budget-val">LKR 38,410</div>
               </div>
-              <div class="mod10-budget-card">
+              <div class="glass-card mod10-budget-card">
                 <div class="mod10-budget-lbl">Remaining Balance</div>
                 <div class="mod10-budget-val">LKR 2,290</div>
               </div>
-              <div class="mod10-budget-card">
+              <div class="glass-card mod10-budget-card">
                 <div class="mod10-budget-lbl">Personal Contribution</div>
                 <div class="mod10-budget-val">LKR 1,700</div>
               </div>
-              <div class="mod10-budget-card" style="grid-column: span 2;">
+              <div class="glass-card mod10-budget-card" style="grid-column: span 2;">
                 <div class="mod10-budget-lbl">Cost Per Care Package</div>
                 <div class="mod10-budget-val">LKR 2,012.50</div>
               </div>
             </div>
-            <div class="mod10-budget-visual">
+            <div class="glass-card mod10-budget-visual">
               <div class="mod10-budget-svg-wrapper">
                 <svg viewBox="0 0 200 200" class="mod10-donut-svg" id="mod10-donut-svg"></svg>
                 <div class="mod10-donut-center">
@@ -930,63 +1006,63 @@ document.addEventListener('DOMContentLoaded', () => {
         <div>
           <h3 class="lecture-section-header"><i class="fas fa-boxes-packing"></i> Care Package Inventory (12 Units Total)</h3>
           <div class="mod10-inventory-grid">
-            <div class="mod10-inventory-card">
+            <div class="glass-card mod10-inventory-card">
               <div class="mod10-inv-header">
                 <div class="mod10-inv-name">Bath Towels</div>
                 <span class="mod10-inv-qty">12 Pcs</span>
               </div>
               <div class="mod10-inv-purpose">High-quality soft cotton bath towels for personal hygiene and daily comfort.</div>
             </div>
-            <div class="mod10-inventory-card">
+            <div class="glass-card mod10-inventory-card">
               <div class="mod10-inv-header">
                 <div class="mod10-inv-name">Antiseptic Liquid</div>
                 <span class="mod10-inv-qty">12 Pcs</span>
               </div>
               <div class="mod10-inv-purpose">For bathing and personal grooming to prevent infections and skin irritation.</div>
             </div>
-            <div class="mod10-inventory-card">
+            <div class="glass-card mod10-inventory-card">
               <div class="mod10-inv-header">
                 <div class="mod10-inv-name">Medicated Soap</div>
                 <span class="mod10-inv-qty">24 Pcs</span>
               </div>
               <div class="mod10-inv-purpose">Gentle, moisturizing antiseptic soaps specifically chosen for elderly skin health.</div>
             </div>
-            <div class="mod10-inventory-card">
+            <div class="glass-card mod10-inventory-card">
               <div class="mod10-inv-header">
                 <div class="mod10-inv-name">Herbal Toothpaste</div>
                 <span class="mod10-inv-qty">12 Pcs</span>
               </div>
               <div class="mod10-inv-purpose">Organic toothpastes for oral hygiene and sensitive gums maintenance.</div>
             </div>
-            <div class="mod10-inventory-card">
+            <div class="glass-card mod10-inventory-card">
               <div class="mod10-inv-header">
                 <div class="mod10-inv-name">Soft Hairbrush</div>
                 <span class="mod10-inv-qty">12 Pcs</span>
               </div>
               <div class="mod10-inv-purpose">Flexible-bristle hairbrushes for gentle scalp grooming and neatness.</div>
             </div>
-            <div class="mod10-inventory-card">
+            <div class="glass-card mod10-inventory-card">
               <div class="mod10-inv-header">
                 <div class="mod10-inv-name">Talcum Powder</div>
                 <span class="mod10-inv-qty">12 Pcs</span>
               </div>
               <div class="mod10-inv-purpose">Mild body powders to maintain dryness, comfort, and a pleasant scent.</div>
             </div>
-            <div class="mod10-inventory-card">
+            <div class="glass-card mod10-inventory-card">
               <div class="mod10-inv-header">
                 <div class="mod10-inv-name">Hand Sanitizer</div>
                 <span class="mod10-inv-qty">12 Pcs</span>
               </div>
               <div class="mod10-inv-purpose">Alcohol-based rub gels to ensure personal sanitation and health safety.</div>
             </div>
-            <div class="mod10-inventory-card">
+            <div class="glass-card mod10-inventory-card">
               <div class="mod10-inv-header">
                 <div class="mod10-inv-name">Moisturizing Cream</div>
                 <span class="mod10-inv-qty">12 Pcs</span>
               </div>
               <div class="mod10-inv-purpose">Hydrating body moisturizers to protect sensitive elderly skin from dry weather.</div>
             </div>
-            <div class="mod10-inventory-card">
+            <div class="glass-card mod10-inventory-card">
               <div class="mod10-inv-header">
                 <div class="mod10-inv-name">First-Aid Gauze</div>
                 <span class="mod10-inv-qty">24 Pcs</span>
@@ -1000,42 +1076,42 @@ document.addEventListener('DOMContentLoaded', () => {
         <div>
           <h3 class="lecture-section-header"><i class="fas fa-champagne-glasses"></i> Event Activities & Interactions</h3>
           <div class="mod10-activities-grid">
-            <div class="mod10-activity-card">
+            <div class="glass-card mod10-activity-card">
               <div class="mod10-act-title"><i class="fas fa-hourglass-start"></i> Arrival & Setup</div>
               <div class="mod10-act-body">
                 <div><span class="mod10-act-lbl">Objective:</span> Coordinate the transport van, unload care kits, and setup acoustic gear.</div>
                 <div><span class="mod10-act-lbl">Outcome:</span> Managed 24 volunteers. Set up staging in under 15 minutes.</div>
               </div>
             </div>
-            <div class="mod10-activity-card">
+            <div class="glass-card mod10-activity-card">
               <div class="mod10-act-title"><i class="fas fa-handshake"></i> Welcome & Ice-Breaker</div>
               <div class="mod10-act-body">
                 <div><span class="mod10-act-lbl">Objective:</span> Break initial barriers and establish a warm rapport with the grandmothers.</div>
                 <div><span class="mod10-act-lbl">Outcome:</span> Sat down with grandmothers, introduced ourselves, and heard their life journeys.</div>
               </div>
             </div>
-            <div class="mod10-activity-card">
+            <div class="glass-card mod10-activity-card">
               <div class="mod10-act-title"><i class="fas fa-guitar"></i> Acoustic Music Session</div>
               <div class="mod10-act-body">
                 <div><span class="mod10-act-lbl">Objective:</span> Perform traditional, nostalgic Sinhala songs (from the 1960s-80s era).</div>
                 <div><span class="mod10-act-lbl">Outcome:</span> Residents sang along, clapped, and shared emotional reflections on music.</div>
               </div>
             </div>
-            <div class="mod10-activity-card">
+            <div class="glass-card mod10-activity-card">
               <div class="mod10-act-title"><i class="fas fa-cookie-bite"></i> Tea Service & Care</div>
               <div class="mod10-act-body">
                 <div><span class="mod10-act-lbl">Objective:</span> Serve warm tea and diabetic-friendly snacks while chatting with residents.</div>
                 <div><span class="mod10-act-lbl">Outcome:</span> Provided physical support for drinking and eating, ensuring safety and comfort.</div>
               </div>
             </div>
-            <div class="mod10-activity-card">
+            <div class="glass-card mod10-activity-card">
               <div class="mod10-act-title"><i class="fas fa-gift"></i> Package Distribution</div>
               <div class="mod10-act-body">
                 <div><span class="mod10-act-lbl">Objective:</span> Distribute the custom hygiene care packs to each resident.</div>
                 <div><span class="mod10-act-lbl">Outcome:</span> Hand-delivered packages, sharing smiles and a moment of gratitude.</div>
               </div>
             </div>
-            <div class="mod10-activity-card">
+            <div class="glass-card mod10-activity-card">
               <div class="mod10-act-title"><i class="fas fa-hourglass-end"></i> Closing & Farewell</div>
               <div class="mod10-act-body">
                 <div><span class="mod10-act-lbl">Objective:</span> Express thanks to the staff and residents; take a unified team group photo.</div>
@@ -1247,7 +1323,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div>
           <h3 class="lecture-section-header"><i class="fas fa-hand-holding-heart"></i> Reciprocal Social Impact</h3>
           <div class="mod10-impact-panels">
-            <div class="mod10-impact-info-card">
+            <div class="glass-card mod10-impact-info-card">
               <div class="mod10-impact-info-title"><i class="fas fa-user-check"></i> Impact on Elderly Residents</div>
               <ul class="mod10-impact-info-list">
                 <li class="mod10-impact-info-item">
@@ -1270,7 +1346,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </li>
               </ul>
             </div>
-            <div class="mod10-impact-info-card">
+            <div class="glass-card mod10-impact-info-card">
               <div class="mod10-impact-info-title"><i class="fas fa-graduation-cap"></i> Learning Value for Volunteers</div>
               <ul class="mod10-impact-info-list">
                 <li class="mod10-impact-info-item">
@@ -1300,27 +1376,27 @@ document.addEventListener('DOMContentLoaded', () => {
         <div>
           <h3 class="lecture-section-header"><i class="fas fa-clipboard-question"></i> Reflection & Lessons Learned</h3>
           <div class="mod10-lessons-board">
-            <div class="mod10-lesson-note">
+            <div class="glass-card mod10-lesson-note">
               <div class="mod10-lesson-header">What Worked Well</div>
               <div class="mod10-lesson-body">Structured delegation of duties. Splitting the team into Logistics, Finance, and Staging groups allowed parallel progress and high efficiency.</div>
             </div>
-            <div class="mod10-lesson-note">
+            <div class="glass-card mod10-lesson-note">
               <div class="mod10-lesson-header">What Could Be Improved</div>
               <div class="mod10-lesson-body">Transit buffer times. Traffic near Central Colombo is highly volatile; future projects must allocate an extra 45 minutes for logistics transport.</div>
             </div>
-            <div class="mod10-lesson-note">
+            <div class="glass-card mod10-lesson-note">
               <div class="mod10-lesson-header">Biggest Challenge</div>
               <div class="mod10-lesson-body">Budget optimization. Getting high-quality medicated supplies within LKR 2,012.50 per pack required intense supplier price comparison and negotiation.</div>
             </div>
-            <div class="mod10-lesson-note">
+            <div class="glass-card mod10-lesson-note">
               <div class="mod10-lesson-header">Most Rewarding Moment</div>
               <div class="mod10-lesson-body">Seeing a blind grandmother who was sitting quietly begin to clap, smile, and sing along when the acoustic guitar started playing old songs.</div>
             </div>
-            <div class="mod10-lesson-note">
+            <div class="glass-card mod10-lesson-note">
               <div class="mod10-lesson-header">Skills Gained</div>
               <div class="mod10-lesson-body">Adaptive leadership, logistics tracking, active listening, negotiation, and high accountability for social project deliverables.</div>
             </div>
-            <div class="mod10-lesson-note">
+            <div class="glass-card mod10-lesson-note">
               <div class="mod10-lesson-header">Future Application</div>
               <div class="mod10-lesson-body">I will apply these crisis-adaptation and team coordination lessons when managing software release pipelines and agile sprints.</div>
             </div>
@@ -1331,7 +1407,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div>
           <h3 class="lecture-section-header"><i class="fas fa-quote-left"></i> Project Testimonials</h3>
           <div class="mod10-testimonials-grid">
-            <div class="mod10-testimonial-card">
+            <div class="glass-card mod10-testimonial-card">
               <div class="mod10-testimonial-quote">
                 "Managing 24 volunteers during a time-sensitive event day was the ultimate test of our communication protocols. We couldn't rely on slack or email; we had to adapt on-site. Seeing the team coordinate setup and distribution so cohesively showed how much our teamwork skills have matured."
               </div>
@@ -1343,7 +1419,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
               </div>
             </div>
-            <div class="mod10-testimonial-card">
+            <div class="glass-card mod10-testimonial-card">
               <div class="mod10-testimonial-quote">
                 "I was initially unsure if we could make a meaningful impact in just one afternoon, but seeing the residents' reaction to our music and talks was extremely grounding. As software engineering undergraduates, we spend so much time in front of screens. This project connected us to the real world."
               </div>
@@ -1361,7 +1437,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- 13. Final Project Reflection -->
         <div>
           <h3 class="lecture-section-header"><i class="fas fa-feather-pointed"></i> Executive Journal Synthesis</h3>
-          <div class="mod10-story-card">
+          <div class="glass-card mod10-story-card">
             <div class="mod10-story-content">
               <p>Organizing the Sri Lankadhara Society outreach campaign was a watershed moment in my professional growth. Managing a large group of 24 team members required moving away from task micro-management and instead focusing on empowerment and dynamic responsibility sharing. Every volunteer had a dedicated mandate, and keeping them aligned during unexpected changes was an exercise in pure leadership.</p>
               <p>The campaign threw real-world curveballs at us: the Colombo transit blockade caught our supplies transport in gridlock, and we discovered critical dietary restrictions for sugar intake that clashed with our pastries plan. These challenges required immediate agile adaptation. We dispatched setup crews on local bikes to prep the elders' home early and negotiated a diabetic-safe tea menu with local bakeries in minutes. We learned that a plan is only a starting point; leadership is what carries a project to success when variables shift.</p>
@@ -2060,7 +2136,7 @@ document.addEventListener('DOMContentLoaded', () => {
           knife.setAttribute("x1", "250"); knife.setAttribute("y1", "210");
           knife.setAttribute("x2", "210"); knife.setAttribute("y2", "140");
           updateDetails("Pause State", "Inverted V: Indicates you are pausing but not finished eating. Utensils stay on the plate while speaking with delegates.");
-        } else {
+        } else if (state === "finish") {
           // Parallel pointing straight up
           fork.setAttribute("x1", "190"); fork.setAttribute("y1", "220");
           fork.setAttribute("x2", "190"); fork.setAttribute("y2", "100");
@@ -2068,6 +2144,30 @@ document.addEventListener('DOMContentLoaded', () => {
           knife.setAttribute("x1", "210"); knife.setAttribute("y1", "220");
           knife.setAttribute("x2", "210"); knife.setAttribute("y2", "100");
           updateDetails("Finished State", "Parallel utensils: Signals the meal is complete. Flatware points straight up or at 10:20 so waitstaff can remove elements.");
+        } else if (state === "next") {
+          // Fork pointing straight up, knife horizontal across it
+          fork.setAttribute("x1", "200"); fork.setAttribute("y1", "220");
+          fork.setAttribute("x2", "200"); fork.setAttribute("y2", "100");
+
+          knife.setAttribute("x1", "140"); knife.setAttribute("y1", "160");
+          knife.setAttribute("x2", "260"); knife.setAttribute("y2", "160");
+          updateDetails("Ready for Next Plate", "Crossed position: Form a cross with the fork vertical and the knife horizontal. This signals to waitstaff that you are ready for the Next Plate.");
+        } else if (state === "excellent") {
+          // Parallel horizontal, pointing right
+          fork.setAttribute("x1", "140"); fork.setAttribute("y1", "150");
+          fork.setAttribute("x2", "260"); fork.setAttribute("y2", "150");
+
+          knife.setAttribute("x1", "140"); knife.setAttribute("y1", "170");
+          knife.setAttribute("x2", "260"); knife.setAttribute("y2", "170");
+          updateDetails("Compliment / Excellent", "Parallel horizontal: Fork and knife placed side-by-side horizontally across the center of the plate, pointing right. Signals you thoroughly enjoyed the meal.");
+        } else if (state === "dontlike") {
+          // Crossed inverted V (protest)
+          fork.setAttribute("x1", "160"); fork.setAttribute("y1", "210");
+          fork.setAttribute("x2", "220"); fork.setAttribute("y2", "110");
+
+          knife.setAttribute("x1", "240"); knife.setAttribute("y1", "210");
+          knife.setAttribute("x2", "180"); knife.setAttribute("y2", "110");
+          updateDetails("Disliked / Protest", "Crossed inverted V: Knife blade inserted through the tines of the fork (or crossed at an angle). Signals that you did not enjoy the meal.");
         }
       }
 
@@ -2078,26 +2178,28 @@ document.addEventListener('DOMContentLoaded', () => {
       let buttonContainer = document.createElement("div");
       buttonContainer.setAttribute("class", "dining-toggle-bar");
 
-      let btnPause = document.createElement("button");
-      btnPause.setAttribute("class", "dining-btn active");
-      btnPause.textContent = "Pause Position";
-      btnPause.addEventListener("click", () => {
-        btnPause.classList.add("active");
-        btnFinish.classList.remove("active");
-        setCutlery("pause");
-      });
+      let buttons = [];
 
-      let btnFinish = document.createElement("button");
-      btnFinish.setAttribute("class", "dining-btn");
-      btnFinish.textContent = "Finished Position";
-      btnFinish.addEventListener("click", () => {
-        btnFinish.classList.add("active");
-        btnPause.classList.remove("active");
-        setCutlery("finish");
-      });
+      function createBtn(state, text) {
+        let btn = document.createElement("button");
+        btn.setAttribute("class", "dining-btn");
+        if (state === "pause") btn.classList.add("active");
+        btn.textContent = text;
+        btn.addEventListener("click", () => {
+          buttons.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          setCutlery(state);
+        });
+        buttons.push(btn);
+        buttonContainer.appendChild(btn);
+      }
 
-      buttonContainer.appendChild(btnPause);
-      buttonContainer.appendChild(btnFinish);
+      createBtn("pause", "Pause Position");
+      createBtn("finish", "Finished Position");
+      createBtn("next", "Next Plate");
+      createBtn("excellent", "Excellent");
+      createBtn("dontlike", "Don't Like");
+
       container.parentElement.insertBefore(buttonContainer, container);
 
     } else if (id === "10") {
@@ -2605,5 +2707,42 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // CV Modal logic
+  const cvModal = document.getElementById('cv-modal');
+  const closeModal = document.querySelector('.close-modal');
+
+  function openCVModal() {
+    if (cvModal) {
+      cvModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeCVModalFunc() {
+    if (cvModal) {
+      cvModal.classList.remove('open');
+      document.body.style.overflow = 'auto';
+    }
+  }
+
+  if (closeModal) {
+    closeModal.addEventListener('click', closeCVModalFunc);
+  }
+
+  if (cvModal) {
+    cvModal.addEventListener('click', (e) => {
+      if (e.target === cvModal) {
+        closeCVModalFunc();
+      }
+    });
+  }
+
+  // Event delegation to catch clicks on any open-cv-btn (including dynamic ones)
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.open-cv-btn')) {
+      openCVModal();
+    }
+  });
 
 });
